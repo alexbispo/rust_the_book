@@ -92,7 +92,7 @@ fn main() {
     println!("The value of 'name's is: {:?}", names);
     println!("The value of 'names[1]' is: {:?}", names[1]);
     let _index = 2;
-    // println!("It will cause a Panic! {}", names[index]);
+    // println!("It will cause a Panic! {}", names[_index]);
 
     let eco = ["Tom"; 3];
     println!("The value of eco is {:?}", eco);
