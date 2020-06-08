@@ -4,6 +4,17 @@
 // There can only be one owner at time.
 // When the owner goes out of scope, the vaue will be dropped.
 
+// The Rules of Rererences:
+
+// At any time, you can have either one mutable reference or any number of
+// imutable references.
+// References must always be valid.
+
+// Alex notes:
+// After create a imutable reference (read only), you can not create
+// a mutable one (read an wirite) untill the imutable refence scope ends.
+
+
 fn main() {
     // string literals
     // It is unmutable.
@@ -110,13 +121,23 @@ fn main() {
     // you can have only one mutable reference to particular piece of data
     // in a particular scope.
     // let st10 = &mut st8;
-    st9.push_str("São Paulo");
+
+    // it does not compiles utill the mutable reference ends.
+    // let st12 = &st8;
+    // println!("st12: {}", st12);
+
+    st9.push_str("São Paulo"); // mutable reference ends
     println!("st8: {}", st8);
     // it does not compile,
-    // because an imutable reference turns invalid after a mutable reference was creted.
+    // because an imutable reference created before mutable ones
+    // turns invalid after a mutable reference was creted.
     // println!("st11: {}", st11);
+
+    // in this point we can create another read only reference from st8.
     let st12 = &st8;
     println!("st12: {}", st12);
+
+    // let reference_to_nothing = dangle();
 }
 
 fn takes_ownership(some_string: String) {
@@ -155,3 +176,11 @@ fn change2(s: &mut String) {
     s.push_str(" ");
     s.push_str("I love Brazil!")
 }
+
+// it does not compiles
+// it trys returns a reference to a value that will be dropped at the functon end.
+// fn dangle() -> &String {
+//     let s = String::from("Brazil");
+
+//     &s
+// }
